@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL_AUTO:update}
+    database: PostgreSQL
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: false
+  application:
+    name: agrichain-api
+
+server:
+  port: ${PORT:8080}
+  tomcat:
+    max-http-request-header-size: 131072
+
+logging:
+  level:
+    org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer: ERROR
+
+springdoc:
+  swagger-ui:
+    path: /docs
+    layout: "BaseLayout"
+    custom-css: ".swagger-ui .scheme-container{display:none!important}.swagger-ui section.schemes{display:none!important}.swagger-ui .topbar{display:none!important}"
+
+# JWT configuration — change expiration here without touching any Java code
+# expiration is in milliseconds: 900000 = 15 minutes | 3600000 = 1 hour | 86400000 = 24 hours
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET_KEY}
+      expiration: 3600000             # access token — 1 hour in milliseconds
+      refresh-token-expiration: 604800000  # refresh token — 7 days in milliseconds
