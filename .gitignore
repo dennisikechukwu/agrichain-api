@@ -30,7 +30,7 @@ build/
 !**/src/test/**/build/
 
 ### VS Code ###
-.vscode/
 
 ### Environment variables — never commit the real .env ###
-.env
+config.bat
+node_modules
